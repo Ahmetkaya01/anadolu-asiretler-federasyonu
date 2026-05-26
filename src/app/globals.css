@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* Kurumsal renk paleti — logo ve prestijli kurumsal kimlik */
+:root {
+  --color-navy: #0b1f3a;
+  --color-navy-light: #142d52;
+  --color-burgundy: #7a1e2c;
+  --color-burgundy-dark: #5c1621;
+  --color-gold: #c9a227;
+  --color-gold-light: #e0bc4a;
+  --color-cream: #f7f5f2;
+  --color-cream-dark: #ebe8e3;
+  --color-slate: #5c6578;
+  --background: var(--color-cream);
+  --foreground: var(--color-navy);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-navy: var(--color-navy);
+  --color-navy-light: var(--color-navy-light);
+  --color-burgundy: var(--color-burgundy);
+  --color-burgundy-dark: var(--color-burgundy-dark);
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+  --color-cream: var(--color-cream);
+  --color-cream-dark: var(--color-cream-dark);
+  --color-slate: var(--color-slate);
+  --font-sans: var(--font-source-sans);
+  --font-display: var(--font-playfair);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Seçim rengi — marka uyumu */
+::selection {
+  background-color: color-mix(in srgb, var(--color-gold) 35%, transparent);
+  color: var(--color-navy);
+}
+
+/* Odak halkaları erişilebilirlik */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
