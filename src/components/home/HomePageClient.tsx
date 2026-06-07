@@ -68,11 +68,11 @@ export function HomePageClient({
             priority
           />
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/92 via-navy/55 to-navy/15"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/88 via-navy/40 to-transparent"
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-navy/20"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-navy/10"
             aria-hidden
           />
           <Container className="relative flex min-h-[420px] flex-col justify-center py-16 sm:min-h-[480px] lg:min-h-[560px] lg:py-20">
@@ -124,50 +124,33 @@ export function HomePageClient({
       <section className="border-b border-gold/10 bg-cream py-16">
         <Container>
           <Reveal>
-            <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-              <div className="lg:col-span-5">
-                <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-lg border border-gold/30 bg-navy/5 shadow-[0_24px_60px_-30px_rgba(11,31,58,0.55)]">
-                  <Image
-                    src="/president-ferhat-armagan.png"
-                    alt="Ferhat Armağan — Anadolu Aşiretler Federasyonu Başkanı"
-                    fill
-                    className="object-cover object-top"
-                    sizes="(min-width: 1024px) 400px, 90vw"
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/80 to-transparent p-5 pt-16"
-                    aria-hidden
-                  />
-                </div>
-                <p className="mt-5 text-center font-display text-2xl text-navy">
-                  Ferhat Armağan
-                </p>
-                <p className="text-center text-sm font-semibold uppercase tracking-widest text-burgundy">
+            <blockquote className="relative mx-auto max-w-3xl text-center">
+              <span
+                className="pointer-events-none absolute -left-2 -top-6 font-display text-7xl leading-none text-gold/25 sm:-left-6"
+                aria-hidden
+              >
+                “
+              </span>
+              <p className="relative font-display text-2xl leading-relaxed text-navy sm:text-3xl">
+                Birlik, beraberlik ve kültürel mirasımızı yaşatma amacıyla tüm
+                temsilciliklerimizle omuz omuza çalışıyoruz.
+              </p>
+              <p className="mt-5 text-base leading-relaxed text-slate">
+                Federasyonumuz; eğitim, kültür ve sosyal dayanışma alanında sürdürülebilir
+                projelerle Anadolu&apos;nun köklü değerlerini geleceğe taşımayı hedefliyor.
+              </p>
+              <footer className="mt-8">
+                <p className="font-display text-xl text-navy">Ferhat Armağan</p>
+                <p className="mt-1 text-sm font-semibold uppercase tracking-widest text-burgundy">
                   Federasyon Başkanı
                 </p>
-              </div>
-              <blockquote className="relative lg:col-span-7">
-                <span
-                  className="pointer-events-none absolute -left-2 -top-6 font-display text-7xl leading-none text-gold/25"
-                  aria-hidden
-                >
-                  “
-                </span>
-                <p className="relative font-display text-2xl leading-relaxed text-navy sm:text-3xl">
-                  Birlik, beraberlik ve kültürel mirasımızı yaşatma amacıyla tüm
-                  temsilciliklerimizle omuz omuza çalışıyoruz.
-                </p>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate">
-                  Federasyonumuz; eğitim, kültür ve sosyal dayanışma alanında sürdürülebilir
-                  projelerle Anadolu&apos;nun köklü değerlerini geleceğe taşımayı hedefliyor.
-                </p>
-                <footer className="mt-6">
+                <div className="mt-6">
                   <Button href="/kurumsal/hakkimizda" variant="ghost" size="sm">
                     Kurumsal profil →
                   </Button>
-                </footer>
-              </blockquote>
-            </div>
+                </div>
+              </footer>
+            </blockquote>
           </Reveal>
         </Container>
       </section>
