@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
+import { InteractiveCard } from "@/components/ui/InteractiveCard";
+import { Reveal } from "@/components/ui/Reveal";
+import { StaggerGrid } from "@/components/ui/StaggerGrid";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -22,21 +25,25 @@ export default function IletisimPage() {
       />
       <main>
         <Container className="py-16">
-          <div className="grid gap-8 lg:grid-cols-2">
-            <div className="rounded-sm border border-navy/10 bg-white p-6">
-              <h2 className="font-display text-3xl text-navy">İletişim Bilgileri</h2>
-              <p className="mt-5 text-sm text-slate">Telefon: {siteConfig.contact.phone}</p>
-              <p className="mt-2 text-sm text-slate">E-posta: {siteConfig.contact.email}</p>
-              <p className="mt-2 text-sm text-slate">Adres: {siteConfig.contact.address}</p>
-            </div>
-            <iframe
-              src={siteConfig.contact.mapEmbedUrl}
-              title="Federasyon Konumu"
-              className="h-[320px] w-full rounded-sm border border-navy/10"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+          <StaggerGrid className="grid gap-8 lg:grid-cols-2">
+            <InteractiveCard>
+              <div>
+                <h2 className="font-display text-3xl text-navy">İletişim Bilgileri</h2>
+                <p className="mt-5 text-sm text-slate">Telefon: {siteConfig.contact.phone}</p>
+                <p className="mt-2 text-sm text-slate">E-posta: {siteConfig.contact.email}</p>
+                <p className="mt-2 text-sm text-slate">Adres: {siteConfig.contact.address}</p>
+              </div>
+            </InteractiveCard>
+            <Reveal>
+              <iframe
+                src={siteConfig.contact.mapEmbedUrl}
+                title="Federasyon Konumu"
+                className="h-[320px] w-full rounded-sm border border-navy/10 shadow-sm transition-smooth hover:shadow-md"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </Reveal>
+          </StaggerGrid>
         </Container>
       </main>
     </>

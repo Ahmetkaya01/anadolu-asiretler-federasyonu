@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [{ url: "/logo.jpg", width: 400, height: 400, alt: siteConfig.name }],
+    images: [{ url: "/hero-banner.png", width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
@@ -63,6 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
+      data-scroll-behavior="smooth"
       className={`${playfair.variable} ${sourceSans.variable} h-full`}
     >
       <body className="flex min-h-full flex-col font-sans antialiased">

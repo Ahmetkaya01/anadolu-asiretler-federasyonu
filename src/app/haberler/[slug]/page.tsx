@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
+import { Badge } from "@/components/ui/Badge";
+import { Card, CardBody } from "@/components/ui/Card";
 
 const postMap: Record<string, { title: string; category: string; content: string }> = {
   "federasyonumuzdan-guncel-aciklama": {
@@ -60,13 +62,19 @@ export default async function HaberDetayPage(props: PageProps) {
       />
       <main>
         <Container className="py-16">
-          <article className="mx-auto max-w-3xl rounded-sm border border-navy/10 bg-white p-8 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-burgundy">
-              {post.category}
-            </p>
-            <h1 className="mt-3 font-display text-4xl text-navy">{post.title}</h1>
-            <p className="mt-6 leading-relaxed text-slate">{post.content}</p>
-          </article>
+          <Card className="mx-auto max-w-3xl overflow-hidden">
+            <CardBody>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <Badge variant="burgundy">{post.category}</Badge>
+              </div>
+              <h1 className="mt-4 font-display text-4xl leading-tight text-navy sm:text-5xl">
+                {post.title}
+              </h1>
+              <div className="mt-7 space-y-4 text-[15px] leading-relaxed text-slate">
+                <p>{post.content}</p>
+              </div>
+            </CardBody>
+          </Card>
         </Container>
       </main>
     </>

@@ -1,5 +1,8 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { NewsTicker } from "@/components/layout/NewsTicker";
+import { PageTransition } from "@/components/layout/PageTransition";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 type SiteLayoutProps = {
   children: React.ReactNode;
@@ -10,8 +13,10 @@ export function SiteLayout({ children }: SiteLayoutProps) {
   return (
     <>
       <Header />
-      <div className="flex flex-1 flex-col">{children}</div>
+      <NewsTicker />
+      <PageTransition>{children}</PageTransition>
       <Footer />
+      <ScrollToTop />
     </>
   );
 }

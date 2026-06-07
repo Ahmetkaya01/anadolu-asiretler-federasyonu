@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
+import { InteractiveCard } from "@/components/ui/InteractiveCard";
+import { StaggerGrid } from "@/components/ui/StaggerGrid";
 
 export const metadata: Metadata = {
   title: "Tüzük ve Belgeler",
@@ -28,25 +31,23 @@ export default function TuzukPage() {
       />
       <main>
         <Container className="py-16">
-          <div className="space-y-4">
+          <StaggerGrid className="space-y-4">
             {docs.map((doc) => (
-              <article
-                key={doc.title}
-                className="flex flex-wrap items-center justify-between gap-4 rounded-sm border border-navy/10 bg-white p-5"
-              >
-                <div>
-                  <h2 className="font-display text-2xl text-navy">{doc.title}</h2>
-                  <p className="text-sm text-slate">{doc.type} - {doc.status}</p>
-                </div>
-                <button
-                  type="button"
-                  className="rounded-sm bg-navy px-4 py-2 text-sm font-medium text-cream transition hover:bg-navy-light"
-                >
-                  Belgeyi Gör
-                </button>
-              </article>
+              <InteractiveCard key={doc.title}>
+                <article className="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <h2 className="font-display text-2xl text-navy">{doc.title}</h2>
+                    <p className="text-sm text-slate">
+                      {doc.type} - {doc.status}
+                    </p>
+                  </div>
+                  <Button variant="secondary" size="sm">
+                    Belgeyi Gör
+                  </Button>
+                </article>
+              </InteractiveCard>
             ))}
-          </div>
+          </StaggerGrid>
         </Container>
       </main>
     </>

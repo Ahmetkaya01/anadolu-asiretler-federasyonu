@@ -37,3 +37,11 @@ export type AffiliateAssociation = {
   city: string;
   logo?: string;
 };
+
+export type ProvincialRepresentative = {
+  id: string;
+  city: string;
+  name: string;
+  title: string;
+  image: string;
+};

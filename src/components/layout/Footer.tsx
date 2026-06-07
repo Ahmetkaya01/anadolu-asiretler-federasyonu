@@ -36,7 +36,7 @@ export function Footer() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 min-w-10 items-center justify-center rounded-full border border-gold/30 px-3 text-xs font-medium text-gold transition hover:border-gold hover:bg-gold/10"
+                  className="flex h-10 min-w-10 items-center justify-center rounded-full border border-gold/30 px-3 text-xs font-medium text-gold transition-smooth hover:-translate-y-0.5 hover:border-gold hover:bg-gold/10"
                   aria-label={label}
                 >
                   {label.slice(0, 2)}
@@ -55,7 +55,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-cream/75 transition hover:text-gold"
+                      className="text-sm text-cream/75 transition-smooth hover:translate-x-0.5 hover:text-gold"
                     >
                       {link.label}
                     </Link>
@@ -72,7 +72,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-cream/75 transition hover:text-gold"
+                      className="text-sm text-cream/75 transition-smooth hover:translate-x-0.5 hover:text-gold"
                     >
                       {link.label}
                     </Link>
@@ -90,7 +90,7 @@ export function Footer() {
               <li>
                 <a
                   href={siteConfig.contact.phoneHref}
-                  className="flex items-start gap-3 transition hover:text-gold"
+                  className="flex items-start gap-3 transition-smooth hover:text-gold"
                 >
                   <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
                   {siteConfig.contact.phone}
@@ -99,7 +99,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${siteConfig.contact.email}`}
-                  className="flex items-start gap-3 transition hover:text-gold"
+                  className="flex items-start gap-3 transition-smooth hover:text-gold"
                 >
                   <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
                   {siteConfig.contact.email}

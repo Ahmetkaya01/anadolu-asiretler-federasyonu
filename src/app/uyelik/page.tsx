@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
+import { InteractiveCard } from "@/components/ui/InteractiveCard";
+import { StaggerGrid } from "@/components/ui/StaggerGrid";
 
 export const metadata: Metadata = {
   title: "Üyelik ve Bağlı Dernekler",
@@ -30,20 +32,19 @@ export default function UyelikPage() {
       />
       <main>
         <Container className="py-16">
-          <div className="grid gap-4 md:grid-cols-2">
+          <StaggerGrid className="grid gap-4 md:grid-cols-2">
             {associations.map((name) => (
-              <article
-                key={name}
-                className="rounded-sm border border-gold/20 bg-white p-5 shadow-sm"
-              >
-                <h2 className="font-display text-2xl text-navy">{name}</h2>
-                <p className="mt-2 text-sm text-slate">
-                  Federasyon çatısı altında aktif temsil ve toplumsal dayanışma
-                  çalışmaları yürütmektedir.
-                </p>
-              </article>
+              <InteractiveCard key={name}>
+                <article>
+                  <h2 className="font-display text-2xl text-navy">{name}</h2>
+                  <p className="mt-2 text-sm text-slate">
+                    Federasyon çatısı altında aktif temsil ve toplumsal dayanışma
+                    çalışmaları yürütmektedir.
+                  </p>
+                </article>
+              </InteractiveCard>
             ))}
-          </div>
+          </StaggerGrid>
         </Container>
       </main>
     </>
