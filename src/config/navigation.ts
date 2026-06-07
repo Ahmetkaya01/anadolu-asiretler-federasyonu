@@ -14,6 +14,7 @@ export const mainNavigation: NavItem[] = [
     ],
   },
   { label: "Haberler", href: "/haberler" },
+  { label: "Ziyaretlerimiz", href: "/ziyaretlerimiz" },
   { label: "Üyelik", href: "/uyelik" },
   { label: "İletişim", href: "/iletisim" },
 ];
@@ -27,6 +28,7 @@ export const footerNavigation = {
   ],
   icerik: [
     { label: "Haberler & Duyurular", href: "/haberler" },
+    { label: "Ziyaretlerimiz", href: "/ziyaretlerimiz" },
     { label: "Bağlı Dernekler", href: "/uyelik" },
     { label: "İletişim", href: "/iletisim" },
   ],

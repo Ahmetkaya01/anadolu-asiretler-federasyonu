@@ -26,9 +26,12 @@ export type NewsArticle = {
   excerpt: string;
   content: string;
   date: string;
-  category: "haber" | "duyuru" | "faaliyet";
+  category: "haber" | "duyuru" | "faaliyet" | "basin";
   image?: string;
   featured?: boolean;
+  /** Dış basın / video bağlantısı */
+  externalUrl?: string;
+  source?: string;
 };
 
 export type AffiliateAssociation = {

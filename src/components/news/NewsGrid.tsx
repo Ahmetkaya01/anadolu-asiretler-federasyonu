@@ -10,10 +10,11 @@ import { Input } from "@/components/ui/Input";
 import { fadeUp, stagger, transition } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
-type Filter = "all" | "haber" | "duyuru" | "faaliyet";
+type Filter = "all" | "haber" | "duyuru" | "faaliyet" | "basin";
 
 const filters: { key: Filter; label: string }[] = [
   { key: "all", label: "Tümü" },
+  { key: "basin", label: "Basında Biz" },
   { key: "haber", label: "Haberler" },
   { key: "duyuru", label: "Duyurular" },
   { key: "faaliyet", label: "Faaliyetler" },
@@ -22,6 +23,7 @@ const filters: { key: Filter; label: string }[] = [
 function categoryLabel(category: NewsArticle["category"]) {
   if (category === "haber") return { text: "Haber", variant: "navy" as const };
   if (category === "duyuru") return { text: "Duyuru", variant: "burgundy" as const };
+  if (category === "basin") return { text: "Basın", variant: "gold" as const };
   return { text: "Faaliyet", variant: "gold" as const };
 }
 
@@ -104,19 +106,32 @@ export function NewsGrid({ posts }: { posts: NewsArticle[] }) {
                 <InteractiveCard>
                   <div className="flex items-center justify-between gap-3">
                     <Badge variant={cat.variant}>{cat.text}</Badge>
-                    <span className="text-xs font-medium text-slate">{post.date}</span>
+                    <span className="text-xs font-medium text-slate">
+                      {post.source ?? post.date}
+                    </span>
                   </div>
                   <h2 className="mt-4 font-display text-2xl leading-tight text-navy">
                     {post.title}
                   </h2>
                   <p className="mt-3 text-sm leading-relaxed text-slate">{post.excerpt}</p>
                   <div className="mt-6">
-                    <Link
-                      href={`/haberler/${post.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-burgundy transition-smooth hover:gap-3 hover:text-burgundy-dark"
-                    >
-                      Detayı Gör <span aria-hidden>→</span>
-                    </Link>
+                    {post.externalUrl ? (
+                      <a
+                        href={post.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-burgundy transition-smooth hover:gap-3 hover:text-burgundy-dark"
+                      >
+                        Kaynağı Gör <span aria-hidden>↗</span>
+                      </a>
+                    ) : (
+                      <Link
+                        href={`/haberler/${post.slug}`}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-burgundy transition-smooth hover:gap-3 hover:text-burgundy-dark"
+                      >
+                        Detayı Gör <span aria-hidden>→</span>
+                      </Link>
+                    )}
                   </div>
                 </InteractiveCard>
               </motion.div>

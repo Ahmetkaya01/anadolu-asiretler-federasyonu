@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import type { NewsArticle } from "@/types";
 import { NewsGrid } from "@/components/news/NewsGrid";
+import { mediaCoverage } from "@/data/media-coverage";
 
 export const metadata: Metadata = {
   title: "Haberler ve Duyurular",
@@ -43,12 +46,14 @@ const posts: NewsArticle[] = [
   },
 ];
 
+const allPosts: NewsArticle[] = [...mediaCoverage, ...posts];
+
 export default function HaberlerPage() {
   return (
     <>
       <PageHeader
         title="Haberler & Duyurular"
-        description="Güncel haberler, duyurular ve faaliyetler."
+        description="Güncel haberler, basın yansımaları, duyurular ve faaliyetler."
         breadcrumb={[
           { label: "Ana Sayfa", href: "/" },
           { label: "Haberler" },
@@ -56,7 +61,14 @@ export default function HaberlerPage() {
       />
       <main>
         <Container className="py-16">
-          <NewsGrid posts={posts} />
+          <Reveal className="mb-10">
+            <SectionHeading
+              eyebrow="Medya"
+              title="Basında Biz"
+              description="Federasyonumuzun ulusal basın, haber ajansları ve video kanallarındaki yansımaları."
+            />
+          </Reveal>
+          <NewsGrid posts={allPosts} />
         </Container>
       </main>
     </>
