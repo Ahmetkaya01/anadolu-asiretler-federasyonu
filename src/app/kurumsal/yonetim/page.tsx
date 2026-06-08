@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { StaggerGrid } from "@/components/ui/StaggerGrid";
 import { LeadershipCard } from "@/components/leadership/LeadershipCard";
-import { federationPresident, boardMembers } from "@/data/leadership";
+import { federationPresident, vicePresidents, boardMembers } from "@/data/leadership";
 
 export const metadata: Metadata = {
   title: "Yönetim Kurulu",
@@ -37,6 +37,20 @@ export default function YonetimPage() {
           <div className="mx-auto mt-10 max-w-xs">
             <LeadershipCard member={federationPresident} />
           </div>
+
+          <Reveal className="mt-16">
+            <SectionHeading
+              eyebrow="Yönetim"
+              title="Başkan Yardımcılarımız"
+              description="Federasyonumuzun başkan yardımcıları ve temsil ettikleri aşiret yapıları."
+              align="center"
+            />
+          </Reveal>
+          <StaggerGrid className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {vicePresidents.map((member) => (
+              <LeadershipCard key={member.id} member={member} />
+            ))}
+          </StaggerGrid>
 
           <Reveal className="mt-16">
             <SectionHeading

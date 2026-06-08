@@ -141,7 +141,7 @@ export function HomePageClient({
                 projelerle Anadolu&apos;nun köklü değerlerini geleceğe taşımayı hedefliyor.
               </p>
               <footer className="mt-8">
-                <p className="font-display text-xl text-navy">Ferhat Armağan</p>
+                <p className="font-display text-xl text-navy">Ferhat ARMAĞAN</p>
                 <p className="mt-1 text-sm font-semibold uppercase tracking-widest text-burgundy">
                   Federasyon Başkanı
                 </p>

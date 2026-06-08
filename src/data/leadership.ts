@@ -14,6 +14,35 @@ export const federationPresident: LeadershipMember = {
   image: "/president-ferhat-armagan.png",
 };
 
+/** Başkan yardımcıları */
+export const vicePresidents: LeadershipMember[] = [
+  {
+    id: "ahmet-hacioglu",
+    name: "Ahmet HACIOĞLU",
+    role: "Başkan Yardımcısı",
+    subtitle: "Sipki Aşireti Kanaat Önderi",
+  },
+  {
+    id: "abdullah-bozkurt",
+    name: "Abdullah BOZKURT",
+    role: "Başkan Yardımcısı",
+    subtitle: "Elya Aşireti Kanaat Önderi",
+  },
+  {
+    id: "ferzende-savluk",
+    name: "Ferzende ŞAVLUK",
+    role: "Başkan Yardımcısı",
+    subtitle: "Şeyh Bızini Aşireti Lideri",
+  },
+  {
+    id: "ozgur-kavak-vp",
+    name: "Dr. Özgür KAVAK",
+    role: "Başkan Yardımcısı",
+    subtitle: "Afyonkarahisar — Çocuk Sağlığı ve Hastalıkları Uzmanı",
+    image: "/representatives/afyonkarahisar.jpg",
+  },
+];
+
 /** Güncel yönetim kurulu listesi */
 export const boardMembers: LeadershipMember[] = [
   {
@@ -26,7 +55,7 @@ export const boardMembers: LeadershipMember[] = [
     id: "omer-avci",
     name: "Ömer AVCI",
     role: "Yönetim Kurulu Üyesi",
-    subtitle: "Sipki Aşireti Kanaat Önderi, İş İnsanı",
+    subtitle: "Sipki Aşireti Kanaat Önderi, İş Adamı",
   },
   {
     id: "adnan-kalkan",
