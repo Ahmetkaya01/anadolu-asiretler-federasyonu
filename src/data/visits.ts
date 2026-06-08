@@ -1,8 +1,15 @@
+export type VisitNote = {
+  quote: string;
+  author: string;
+  authorTitle: string;
+};
+
 export type VisitPhoto = {
   id: string;
   image: string;
   title: string;
   description?: string;
+  visitNote?: VisitNote;
 };
 
 export const federationVisits: VisitPhoto[] = [
@@ -23,9 +30,15 @@ export const federationVisits: VisitPhoto[] = [
   {
     id: "visit-03",
     image: "/visits/visit-03.png",
-    title: "Üst Düzey Kurumsal Ziyaret",
+    title: "Üst Düzey Kurumsal Ziyaret — MHP Genel Başkanı Devlet BAHÇELİ",
     description:
-      "Anadolu Aşiretler Federasyonu temsilcilerinin üst düzey kurumsal ziyaretinden bir an.",
+      "Anadolu Aşiretler Federasyonu temsilcilerinin MHP Genel Başkanı Devlet BAHÇELİ ile gerçekleştirdiği üst düzey kurumsal ziyaret.",
+    visitNote: {
+      quote:
+        "Davamızın harcı duayla karılmış, haysiyet ve hedefleri nice kahramanımızın fedakârlıklarıyla yoğrulmuştur.",
+      author: "Devlet BAHÇELİ",
+      authorTitle: "MHP Genel Başkanı",
+    },
   },
   {
     id: "visit-04",

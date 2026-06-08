@@ -1,6 +1,6 @@
-import Image from "next/image";
 import type { ProvincialRepresentative } from "@/types";
 import { Badge } from "@/components/ui/Badge";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 import { cn } from "@/lib/utils";
 
 type RepresentativeCardProps = {
@@ -21,25 +21,19 @@ export function RepresentativeCard({
         className,
       )}
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-navy/5">
-        <Image
-          src={representative.image}
-          alt={`${representative.city} il temsilcisi ${representative.name}`}
-          fill
-          className="object-cover object-top transition-smooth group-hover:scale-[1.03]"
-          sizes="(min-width: 1024px) 280px, (min-width: 640px) 33vw, 50vw"
-          priority={priority}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/70 via-transparent to-transparent opacity-80"
-          aria-hidden
-        />
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <Badge variant="gold">{representative.city}</Badge>
-        </div>
-      </div>
-      <div className="p-5">
-        <h3 className="font-display text-xl text-navy">{representative.name}</h3>
+      <OptimizedImage
+        src={representative.image}
+        alt={`${representative.city} il temsilcisi ${representative.name}`}
+        fit="contain"
+        frameClassName="aspect-[3/4] min-h-[280px] sm:min-h-[320px]"
+        sizes="(min-width: 1024px) 280px, (min-width: 640px) 33vw, 50vw"
+        priority={priority}
+        quality={85}
+        className="transition-smooth group-hover:scale-[1.02]"
+      />
+      <div className="border-t border-navy/5 p-5">
+        <Badge variant="gold">{representative.city}</Badge>
+        <h3 className="mt-3 font-display text-xl text-navy">{representative.name}</h3>
         <p className="mt-1.5 text-sm leading-relaxed text-burgundy">
           {representative.title}
         </p>

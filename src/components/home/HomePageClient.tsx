@@ -58,14 +58,15 @@ export function HomePageClient({
     <main>
       {/* Hero */}
       <section className="relative overflow-hidden bg-navy">
-        <div className="relative min-h-[420px] sm:min-h-[480px] lg:min-h-[560px]">
+        <div className="relative aspect-[3/2] w-full max-h-[min(72vh,680px)]">
           <Image
             src="/hero-banner.png"
             alt="Anadolu Aşiretler Federasyonu — birlik, kültür ve dayanışma"
             fill
-            className="object-cover object-center"
+            className="object-cover object-[center_45%]"
             sizes="100vw"
             priority
+            quality={90}
           />
           <div
             className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/88 via-navy/40 to-transparent"
@@ -75,7 +76,7 @@ export function HomePageClient({
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-navy/10"
             aria-hidden
           />
-          <Container className="relative flex min-h-[420px] flex-col justify-center py-16 sm:min-h-[480px] lg:min-h-[560px] lg:py-20">
+          <Container className="relative flex min-h-[320px] flex-col justify-center py-12 sm:min-h-[360px] sm:py-16 lg:py-20">
             <motion.div
               className="max-w-2xl"
               initial="hidden"

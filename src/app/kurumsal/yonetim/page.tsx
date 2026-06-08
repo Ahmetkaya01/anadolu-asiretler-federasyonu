@@ -1,33 +1,24 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
-import { InteractiveCard } from "@/components/ui/InteractiveCard";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { StaggerGrid } from "@/components/ui/StaggerGrid";
+import { LeadershipCard } from "@/components/leadership/LeadershipCard";
+import { federationPresident, boardMembers } from "@/data/leadership";
 
 export const metadata: Metadata = {
   title: "Yönetim Kurulu",
   description:
-    "Anadolu Aşiretler Federasyonu yönetim kurulu ve kurucular kadrosu.",
+    "Anadolu Aşiretler Federasyonu başkanı ve yönetim kurulu kadrosu.",
 };
-
-const members = [
-  {
-    name: "Ferhat Armağan",
-    title: "Federasyon Başkanı",
-    image: "/president-ferhat-armagan.png",
-  },
-  { name: "Yönetim Kurulu Üyesi", title: "Genel Başkan Vekili" },
-  { name: "Yönetim Kurulu Üyesi", title: "Genel Sekreter" },
-  { name: "Yönetim Kurulu Üyesi", title: "Teşkilatlanma Başkanı" },
-];
 
 export default function YonetimPage() {
   return (
     <>
       <PageHeader
         title="Yönetim Kurulu"
-        description="Yönetim kurulu üyeleri ve kurucularımız."
+        description="Federasyon başkanı ve güncel yönetim kurulu kadromuz."
         breadcrumb={[
           { label: "Ana Sayfa", href: "/" },
           { label: "Kurumsal", href: "/kurumsal/hakkimizda" },
@@ -36,27 +27,28 @@ export default function YonetimPage() {
       />
       <main>
         <Container className="py-16">
-          <StaggerGrid className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {members.map((member) => (
-              <InteractiveCard key={member.title} bodyClassName="text-center">
-                <article>
-                  {member.image ? (
-                    <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-full border-2 border-gold/30">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover object-top"
-                        sizes="112px"
-                      />
-                    </div>
-                  ) : (
-                    <div className="mx-auto h-20 w-20 rounded-full bg-gradient-to-br from-gold/40 to-burgundy/30 transition-smooth group-hover:scale-105" />
-                  )}
-                  <h2 className="mt-4 font-display text-2xl text-navy">{member.name}</h2>
-                  <p className="mt-2 text-sm text-burgundy">{member.title}</p>
-                </article>
-              </InteractiveCard>
+          <Reveal>
+            <SectionHeading
+              eyebrow="Liderlik"
+              title="Federasyon Başkanı"
+              align="center"
+            />
+          </Reveal>
+          <div className="mx-auto mt-10 max-w-xs">
+            <LeadershipCard member={federationPresident} />
+          </div>
+
+          <Reveal className="mt-16">
+            <SectionHeading
+              eyebrow="Yönetim"
+              title="Yönetim Kurulumuz"
+              description="Federasyonumuzun güncel yönetim kurulu üyeleri ve görev alanları."
+              align="center"
+            />
+          </Reveal>
+          <StaggerGrid className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {boardMembers.map((member) => (
+              <LeadershipCard key={member.id} member={member} />
             ))}
           </StaggerGrid>
         </Container>

@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { InteractiveCard } from "@/components/ui/InteractiveCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { StaggerGrid } from "@/components/ui/StaggerGrid";
+import { YouTubeEmbed } from "@/components/ui/YouTubeEmbed";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -34,6 +35,21 @@ export default function HakkimizdaPage() {
               description={siteConfig.mission}
             />
           </Reveal>
+
+          <Reveal className="mt-12">
+            <SectionHeading
+              eyebrow="Tanıtım"
+              title="Federasyonumuzdan Video"
+              description="Anadolu Aşiretler Federasyonu'nun kurumsal mesajını ve faaliyetlerini yansıtan tanıtım videosu."
+              align="center"
+            />
+            <YouTubeEmbed
+              videoId="5MZ6xZdraqQ"
+              title="Anadolu Aşiretler Federasyonu tanıtım videosu"
+              className="mt-8 max-w-4xl"
+            />
+          </Reveal>
+
           <StaggerGrid className="mt-10 grid gap-6 md:grid-cols-2">
             <InteractiveCard>
               <article>

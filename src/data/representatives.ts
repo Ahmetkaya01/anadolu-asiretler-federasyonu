@@ -52,3 +52,10 @@ export const provincialRepresentatives: ProvincialRepresentative[] = [
     image: "/representatives/siirt.jpg",
   },
 ];
+
+/** İl id'sine göre temsilci sözlüğü */
+export function buildRepresentativeMap(
+  representatives: ProvincialRepresentative[] = provincialRepresentatives,
+): Record<string, ProvincialRepresentative> {
+  return Object.fromEntries(representatives.map((rep) => [rep.id, rep]));
+}

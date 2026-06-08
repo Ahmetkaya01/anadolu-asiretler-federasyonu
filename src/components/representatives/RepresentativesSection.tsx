@@ -29,7 +29,7 @@ export function RepresentativesSection({
           <SectionHeading
             eyebrow="Teşkilatlanma"
             title="İl Temsilcilerimiz"
-            description="Türkiye genelinde teşkilatlanma çalışmalarımız kapsamında görev yapan il temsilcilerimiz."
+            description="81 il temsilcilik yapılanmamız kapsamında görev yapan temsilcilerimiz. Tüm illeri görüntülemek için detay sayfasını ziyaret edin."
             align="center"
           />
         </Reveal>
@@ -51,7 +51,7 @@ export function RepresentativesSection({
         {showAllLink && (
           <Reveal delay={0.08} className="mt-10 text-center">
             <Button href="/kurumsal/il-temsilcileri" variant="ghost" size="sm">
-              Detaylı liste →
+              81 il temsilcilik haritası →
             </Button>
           </Reveal>
         )}
