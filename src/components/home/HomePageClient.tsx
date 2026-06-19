@@ -48,70 +48,81 @@ export function HomePageClient({
 
   return (
     <main className="bg-background">
-      {/* Landing hero */}
-      <section className="relative min-h-[85vh] sm:min-h-[92vh]">
-        <HeroSlideshow
-          slides={heroSlides}
-          onSlideChange={(index) => setSlideCaption(heroSlides[index]?.caption)}
-        />
+      {/* Landing hero — metin sol, belirgin görseller sağ */}
+      <section className="relative min-h-[min(100vh,920px)] bg-navy">
+        <div className="grid min-h-[inherit] lg:grid-cols-2">
+          <div className="relative order-2 flex flex-col justify-center lg:order-1">
+            <div
+              className="pointer-events-none absolute inset-0 bg-navy lg:bg-gradient-to-r lg:from-navy lg:via-navy/95 lg:to-navy/70"
+              aria-hidden
+            />
+            <Container className="relative z-10 py-12 sm:py-16 lg:py-20">
+              <motion.div
+                className="max-w-xl"
+                initial="hidden"
+                animate="visible"
+                variants={stagger.container}
+              >
+                <motion.p
+                  variants={fadeUp}
+                  transition={transition.base}
+                  className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-gold"
+                >
+                  {siteName}
+                </motion.p>
+                <motion.h1
+                  variants={fadeUp}
+                  transition={transition.base}
+                  className="max-w-xl font-display text-4xl font-semibold leading-tight text-cream sm:text-5xl lg:text-6xl"
+                >
+                  {slogan}
+                </motion.h1>
+                <motion.p
+                  variants={fadeUp}
+                  transition={transition.base}
+                  className="mt-5 max-w-lg text-lg leading-relaxed text-cream/85 sm:text-xl"
+                >
+                  {mission}
+                </motion.p>
+                <motion.div
+                  variants={fadeUp}
+                  transition={transition.base}
+                  className="mt-8 flex flex-wrap gap-4"
+                >
+                  <Button href="/kurumsal/hakkimizda" variant="primary" size="lg">
+                    Kurumsal
+                  </Button>
+                  <Button href="/iletisim" variant="outline" size="lg" className="border-gold/50 text-cream hover:text-cream">
+                    İletişim
+                  </Button>
+                </motion.div>
+              </motion.div>
 
-        <Container className="relative z-10 flex min-h-[85vh] flex-col justify-center py-28 sm:min-h-[92vh] sm:py-32">
-          <motion.div
-            className="max-w-2xl"
-            initial="hidden"
-            animate="visible"
-            variants={stagger.container}
-          >
-            <motion.p
-              variants={fadeUp}
-              transition={transition.base}
-              className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-gold"
-            >
-              {siteName}
-            </motion.p>
-            <motion.h1
-              variants={fadeUp}
-              transition={transition.base}
-              className="max-w-xl font-display text-4xl font-semibold leading-tight text-cream sm:text-5xl lg:text-7xl"
-            >
-              {slogan}
-            </motion.h1>
-            <motion.p
-              variants={fadeUp}
-              transition={transition.base}
-              className="mt-5 max-w-lg text-lg leading-relaxed text-cream/85 sm:text-xl"
-            >
-              {mission}
-            </motion.p>
-            <motion.div
-              variants={fadeUp}
-              transition={transition.base}
-              className="mt-8 flex flex-wrap gap-4"
-            >
-              <Button href="/kurumsal/hakkimizda" variant="primary" size="lg">
-                Kurumsal
-              </Button>
-              <Button href="/iletisim" variant="outline" size="lg" className="text-cream border-gold/50 hover:text-cream">
-                İletişim
-              </Button>
-            </motion.div>
-          </motion.div>
+              {slideCaption && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  key={slideCaption}
+                  className="mt-10 text-sm font-medium tracking-wide text-gold/90 sm:text-base"
+                >
+                  {slideCaption}
+                </motion.p>
+              )}
+            </Container>
 
-          {slideCaption && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              key={slideCaption}
-              className="mt-auto hidden pt-12 text-right text-sm font-medium tracking-wide text-cream/60 sm:block"
-            >
-              {slideCaption}
-            </motion.p>
-          )}
-        </Container>
+            <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-cream/50 lg:flex">
+              <span className="text-[10px] uppercase tracking-[0.2em]">Keşfet</span>
+              <ChevronDown className="h-4 w-4 animate-bounce" aria-hidden />
+            </div>
+          </div>
 
-        <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-cream/50">
-          <span className="text-[10px] uppercase tracking-[0.2em]">Keşfet</span>
-          <ChevronDown className="h-4 w-4 animate-bounce" aria-hidden />
+          <div className="relative order-1 min-h-[44vh] sm:min-h-[50vh] lg:order-2 lg:min-h-full">
+            <HeroSlideshow
+              slides={heroSlides}
+              prominent
+              onSlideChange={(index) => setSlideCaption(heroSlides[index]?.caption)}
+            />
+          </div>
         </div>
         <div className="divider-gold absolute bottom-0 left-0 right-0 z-10" />
       </section>
