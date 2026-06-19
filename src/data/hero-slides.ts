@@ -30,15 +30,15 @@ export const heroSlides: HeroSlide[] = [
     src: "/visits/visit-01.png",
     alt: "Federasyon resmî ziyaret ve temasları",
     caption: "Kurumsal Temaslar",
-    fit: "contain",
-    objectPosition: "center top",
+    fit: "cover",
+    objectPosition: "center center",
   },
   {
     id: "03",
     src: "/visits/visit-02.png",
     alt: "Siyasi ve toplumsal kurumlarla görüşmeler",
     caption: "Resmî Görüşmeler",
-    fit: "contain",
+    fit: "cover",
     objectPosition: "center center",
   },
   {
@@ -46,7 +46,7 @@ export const heroSlides: HeroSlide[] = [
     src: "/visits/visit-03.png",
     alt: "Federasyon ziyaret programı",
     caption: "Ziyaretlerimiz",
-    fit: "contain",
+    fit: "cover",
     objectPosition: "center center",
   },
   {
@@ -54,11 +54,11 @@ export const heroSlides: HeroSlide[] = [
     src: "/visits/visit-04.png",
     alt: "Federasyon faaliyetlerinden kareler",
     caption: "Faaliyetlerimiz",
-    fit: "contain",
+    fit: "cover",
     objectPosition: "center center",
   },
 ];
 
-/** Hero slayt değişim süresi (1–2 sn arası) */
-export const HERO_SLIDE_INTERVAL_MS = 1500;
-export const HERO_SLIDE_FADE_MS = 450;
+/** Hero slayt değişim süresi */
+export const HERO_SLIDE_INTERVAL_MS = 2000;
+export const HERO_SLIDE_FADE_MS = 500;

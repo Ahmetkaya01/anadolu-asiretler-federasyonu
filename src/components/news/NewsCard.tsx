@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { NewsArticle } from "@/types";
 import { Badge } from "@/components/ui/Badge";
 import { InteractiveCard } from "@/components/ui/InteractiveCard";
@@ -44,17 +45,23 @@ export function NewsCard({ post, compact = false, className }: NewsCardProps) {
     <InteractiveCard className={cn("overflow-hidden p-0", className)} bodyClassName="p-0">
       <div
         className={cn(
-          "relative bg-gradient-to-br",
+          "relative overflow-hidden bg-gradient-to-br",
           cat.gradient,
-          compact ? "h-28" : "h-36",
+          compact ? "h-28" : post.image ? "h-44 sm:h-48" : "h-36",
         )}
       >
         {post.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={post.image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <Image
+            src={post.image}
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
         ) : (
           <div className="absolute inset-0 pattern-anatolian opacity-30" aria-hidden />
         )}
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/10 to-transparent" aria-hidden />
         <div className="absolute bottom-3 left-4">
           <Badge variant={cat.variant}>{cat.text}</Badge>
         </div>

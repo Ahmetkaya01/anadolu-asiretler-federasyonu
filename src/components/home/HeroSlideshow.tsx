@@ -113,13 +113,14 @@ export function HeroSlideshow({
       ) : (
         <>
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/75 via-navy/35 to-transparent"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/45 to-navy/15"
             aria-hidden
           />
           <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-navy/20"
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-transparent to-navy/30"
             aria-hidden
           />
+          <div className="hero-vignette pointer-events-none absolute inset-0" aria-hidden />
         </>
       )}
 

@@ -12,6 +12,7 @@ export const federationNews: NewsArticle[] = [
       "Anadolu Aşiretler Federasyonu olarak birlik, kültür ve dayanışma eksenindeki çalışmalarımızı kararlılıkla sürdürmekteyiz. İl temsilciliklerimiz ve gönüllülerimizle yürüttüğümüz faaliyetlerin yeni dönem planlamaları tamamlanmış olup, kamuoyuna düzenli bilgilendirme yapılacaktır.",
     date: "18 May 2026",
     featured: true,
+    image: "/news/news-guncel-aciklama.png",
   },
   {
     slug: "il-temsilcilikleri-koordinasyon-toplantisi",
@@ -23,6 +24,7 @@ export const federationNews: NewsArticle[] = [
       "Türkiye genelindeki il temsilciliklerimizin katılımıyla düzenlenen koordinasyon toplantısında teşkilatlanma süreci, saha çalışmaları ve toplumsal projelerin yerel düzeyde etkin uygulanması değerlendirilmiştir.",
     date: "21 Nis 2026",
     featured: true,
+    image: "/news/news-koordinasyon.png",
   },
   {
     slug: "genclik-ve-egitim-odakli-projeler",
@@ -34,6 +36,7 @@ export const federationNews: NewsArticle[] = [
       "Federasyonumuz gençlik ve eğitim odaklı yeni projeler için hazırlık sürecini başlatmıştır. Bu kapsamda kültürel mirasın genç kuşaklara aktarılması, sosyal dayanışma bilincinin geliştirilmesi ve yerel etkinliklerin artırılması hedeflenmektedir.",
     date: "21 Nis 2026",
     featured: true,
+    image: "/news/news-genclik.png",
   },
 ];
 

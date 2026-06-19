@@ -48,81 +48,70 @@ export function HomePageClient({
 
   return (
     <main className="bg-background">
-      {/* Landing hero — metin sol, belirgin görseller sağ */}
-      <section className="relative min-h-[min(100vh,920px)] bg-navy">
-        <div className="grid min-h-[inherit] lg:grid-cols-2">
-          <div className="relative order-2 flex flex-col justify-center lg:order-1">
-            <div
-              className="pointer-events-none absolute inset-0 bg-navy lg:bg-gradient-to-r lg:from-navy lg:via-navy/95 lg:to-navy/70"
-              aria-hidden
-            />
-            <Container className="relative z-10 py-12 sm:py-16 lg:py-20">
-              <motion.div
-                className="max-w-xl"
-                initial="hidden"
-                animate="visible"
-                variants={stagger.container}
-              >
-                <motion.p
-                  variants={fadeUp}
-                  transition={transition.base}
-                  className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-gold"
-                >
-                  {siteName}
-                </motion.p>
-                <motion.h1
-                  variants={fadeUp}
-                  transition={transition.base}
-                  className="max-w-xl font-display text-4xl font-semibold leading-tight text-cream sm:text-5xl lg:text-6xl"
-                >
-                  {slogan}
-                </motion.h1>
-                <motion.p
-                  variants={fadeUp}
-                  transition={transition.base}
-                  className="mt-5 max-w-lg text-lg leading-relaxed text-cream/85 sm:text-xl"
-                >
-                  {mission}
-                </motion.p>
-                <motion.div
-                  variants={fadeUp}
-                  transition={transition.base}
-                  className="mt-8 flex flex-wrap gap-4"
-                >
-                  <Button href="/kurumsal/hakkimizda" variant="primary" size="lg">
-                    Kurumsal
-                  </Button>
-                  <Button href="/iletisim" variant="outline" size="lg" className="border-gold/50 text-cream hover:text-cream">
-                    İletişim
-                  </Button>
-                </motion.div>
-              </motion.div>
+      {/* Landing hero — tam ekran yayılmış görseller */}
+      <section className="relative min-h-[85vh] sm:min-h-[92vh]">
+        <HeroSlideshow
+          slides={heroSlides}
+          onSlideChange={(index) => setSlideCaption(heroSlides[index]?.caption)}
+        />
 
-              {slideCaption && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  key={slideCaption}
-                  className="mt-10 text-sm font-medium tracking-wide text-gold/90 sm:text-base"
-                >
-                  {slideCaption}
-                </motion.p>
-              )}
-            </Container>
+        <Container className="relative z-10 flex min-h-[85vh] flex-col justify-center py-28 sm:min-h-[92vh] sm:py-32">
+          <motion.div
+            className="max-w-2xl"
+            initial="hidden"
+            animate="visible"
+            variants={stagger.container}
+          >
+            <motion.p
+              variants={fadeUp}
+              transition={transition.base}
+              className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-gold"
+            >
+              {siteName}
+            </motion.p>
+            <motion.h1
+              variants={fadeUp}
+              transition={transition.base}
+              className="max-w-xl font-display text-4xl font-semibold leading-tight text-cream sm:text-5xl lg:text-7xl"
+            >
+              {slogan}
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
+              transition={transition.base}
+              className="mt-5 max-w-lg text-lg leading-relaxed text-cream/85 sm:text-xl"
+            >
+              {mission}
+            </motion.p>
+            <motion.div
+              variants={fadeUp}
+              transition={transition.base}
+              className="mt-8 flex flex-wrap gap-4"
+            >
+              <Button href="/kurumsal/hakkimizda" variant="primary" size="lg">
+                Kurumsal
+              </Button>
+              <Button href="/iletisim" variant="outline" size="lg" className="border-gold/50 text-cream hover:text-cream">
+                İletişim
+              </Button>
+            </motion.div>
+          </motion.div>
 
-            <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-cream/50 lg:flex">
-              <span className="text-[10px] uppercase tracking-[0.2em]">Keşfet</span>
-              <ChevronDown className="h-4 w-4 animate-bounce" aria-hidden />
-            </div>
-          </div>
+          {slideCaption && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              key={slideCaption}
+              className="mt-auto hidden pt-12 text-right text-sm font-medium tracking-wide text-cream/60 sm:block"
+            >
+              {slideCaption}
+            </motion.p>
+          )}
+        </Container>
 
-          <div className="relative order-1 min-h-[44vh] sm:min-h-[50vh] lg:order-2 lg:min-h-full">
-            <HeroSlideshow
-              slides={heroSlides}
-              prominent
-              onSlideChange={(index) => setSlideCaption(heroSlides[index]?.caption)}
-            />
-          </div>
+        <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-cream/50">
+          <span className="text-[10px] uppercase tracking-[0.2em]">Keşfet</span>
+          <ChevronDown className="h-4 w-4 animate-bounce" aria-hidden />
         </div>
         <div className="divider-gold absolute bottom-0 left-0 right-0 z-10" />
       </section>
@@ -131,14 +120,15 @@ export function HomePageClient({
       <section className="border-b border-gold/10 bg-surface py-16">
         <Container>
           <Reveal>
-            <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[240px_1fr] lg:items-start">
-              <div className="relative mx-auto aspect-[3/4] w-full max-w-[240px] overflow-hidden rounded-md border-2 border-gold/30 shadow-card">
+            <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(280px,340px)_1fr] lg:items-center">
+              <div className="mx-auto w-full max-w-[340px] overflow-hidden rounded-md border-2 border-gold/30 shadow-card">
                 <Image
                   src="/president-ferhat-armagan.png"
                   alt="Ferhat ARMAĞAN — Federasyon Başkanı"
-                  fill
-                  className="object-contain object-top bg-surface-elevated"
-                  sizes="240px"
+                  width={1024}
+                  height={682}
+                  className="h-auto w-full"
+                  sizes="(max-width: 1024px) 90vw, 340px"
                 />
               </div>
               <blockquote className="relative border-l-4 border-gold pl-6 sm:pl-8">
