@@ -4,18 +4,29 @@ export type LeadershipMember = {
   role: string;
   subtitle?: string;
   image?: string;
+  phone?: string;
+  phoneHref?: string;
   isPlaceholder?: boolean;
 };
 
 export const federationPresident: LeadershipMember = {
   id: "ferhat-armagan",
   name: "Ferhat ARMAĞAN",
-  role: "Federasyon Başkanı",
+  role: "ANADOLU AŞİRETLER FEDERASYONU GENEL BAŞKANI",
   image: "/president-ferhat-armagan.png",
 };
 
 /** Başkan yardımcıları */
 export const vicePresidents: LeadershipMember[] = [
+  {
+    id: "ozgur-kavak-vp",
+    name: "Uzm.Dr. ÖZGÜR KAVAK",
+    role: "Başkan Yardımcısı",
+    subtitle: "ÇOCUK SAĞLIĞI VE HASTALIKLARI UZMANI",
+    image: "/representatives/afyonkarahisar.jpg",
+    phone: "0533 660 18 29",
+    phoneHref: "tel:+905336601829",
+  },
   {
     id: "ahmet-hacioglu",
     name: "Ahmet HACIOĞLU",
@@ -33,13 +44,6 @@ export const vicePresidents: LeadershipMember[] = [
     name: "Ferzende ŞAVLUK",
     role: "Başkan Yardımcısı",
     subtitle: "Şeyh Bızini Aşireti Lideri",
-  },
-  {
-    id: "ozgur-kavak-vp",
-    name: "Dr. Özgür KAVAK",
-    role: "Başkan Yardımcısı",
-    subtitle: "Afyonkarahisar — Çocuk Sağlığı ve Hastalıkları Uzmanı",
-    image: "/representatives/afyonkarahisar.jpg",
   },
 ];
 

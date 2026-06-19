@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { UserRound } from "lucide-react";
+import { Phone, UserRound } from "lucide-react";
 import type { LeadershipMember } from "@/data/leadership";
 import { InteractiveCard } from "@/components/ui/InteractiveCard";
 import { cn } from "@/lib/utils";
@@ -8,6 +8,20 @@ type LeadershipCardProps = {
   member: LeadershipMember;
   featured?: boolean;
 };
+
+function MemberPhone({ member }: { member: LeadershipMember }) {
+  if (!member.phone || !member.phoneHref) return null;
+
+  return (
+    <a
+      href={member.phoneHref}
+      className="mt-3 inline-flex items-center justify-center gap-2 text-sm font-medium text-gold transition-smooth hover:text-gold-light"
+    >
+      <Phone className="h-4 w-4 shrink-0" aria-hidden />
+      {member.phone}
+    </a>
+  );
+}
 
 export function LeadershipCard({ member, featured = false }: LeadershipCardProps) {
   if (member.isPlaceholder) {
@@ -49,6 +63,7 @@ export function LeadershipCard({ member, featured = false }: LeadershipCardProps
               {member.subtitle}
             </p>
           )}
+          <MemberPhone member={member} />
         </article>
       </InteractiveCard>
     );
@@ -83,6 +98,7 @@ export function LeadershipCard({ member, featured = false }: LeadershipCardProps
         {member.subtitle && (
           <p className="mt-2 text-sm leading-relaxed text-muted">{member.subtitle}</p>
         )}
+        <MemberPhone member={member} />
       </article>
     </InteractiveCard>
   );

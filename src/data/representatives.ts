@@ -40,7 +40,7 @@ export const provincialRepresentatives: ProvincialRepresentative[] = [
   {
     id: "afyonkarahisar",
     city: "Afyonkarahisar",
-    name: "Dr. Özgür KAVAK",
+    name: "Uzm.Dr. ÖZGÜR KAVAK",
     title: "İl Temsilcisi",
     image: "/representatives/afyonkarahisar.jpg",
   },

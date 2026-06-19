@@ -9,6 +9,10 @@ export const mainNavigation: NavItem[] = [
     children: [
       { label: "Hakkımızda", href: "/kurumsal/hakkimizda" },
       { label: "Tüzük ve Belgeler", href: "/kurumsal/tuzuk" },
+      {
+        label: "Başkan ve Başkan Yardımcıları",
+        href: "/kurumsal/yonetim#baskan-yardimcilari",
+      },
       { label: "Yönetim Kurulu", href: "/kurumsal/yonetim" },
       { label: "İl Temsilcileri", href: "/kurumsal/il-temsilcileri" },
     ],
@@ -23,6 +27,10 @@ export const footerNavigation = {
   kurumsal: [
     { label: "Hakkımızda", href: "/kurumsal/hakkimizda" },
     { label: "Tüzük ve Belgeler", href: "/kurumsal/tuzuk" },
+    {
+      label: "Başkan ve Başkan Yardımcıları",
+      href: "/kurumsal/yonetim#baskan-yardimcilari",
+    },
     { label: "Yönetim Kurulu", href: "/kurumsal/yonetim" },
     { label: "İl Temsilcileri", href: "/kurumsal/il-temsilcileri" },
   ],

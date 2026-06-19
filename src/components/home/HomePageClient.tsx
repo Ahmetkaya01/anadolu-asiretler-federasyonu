@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import type { StatItem, ProvincialRepresentative } from "@/types";
 import { getFeaturedNews } from "@/data/news";
 import { heroSlides } from "@/data/hero-slides";
+import { federationPresident } from "@/data/leadership";
 import { fadeUp, stagger, transition } from "@/lib/motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -124,7 +125,7 @@ export function HomePageClient({
               <div className="mx-auto w-full max-w-[340px] overflow-hidden rounded-md border-2 border-gold/30 shadow-card">
                 <Image
                   src="/president-ferhat-armagan.png"
-                  alt="Ferhat ARMAĞAN — Federasyon Başkanı"
+                  alt={`${federationPresident.name} — ${federationPresident.role}`}
                   width={1024}
                   height={682}
                   className="h-auto w-full"
@@ -141,9 +142,9 @@ export function HomePageClient({
                   projelerle Anadolu&apos;nun köklü değerlerini geleceğe taşımayı hedefliyor.
                 </p>
                 <footer className="mt-8">
-                  <p className="font-display text-2xl text-foreground">Ferhat ARMAĞAN</p>
+                  <p className="font-display text-2xl text-foreground">{federationPresident.name}</p>
                   <p className="mt-1 text-sm font-semibold uppercase tracking-widest text-gold">
-                    Federasyon Başkanı
+                    {federationPresident.role}
                   </p>
                   <div className="mt-6">
                     <Button href="/kurumsal/hakkimizda" variant="ghost" size="sm">

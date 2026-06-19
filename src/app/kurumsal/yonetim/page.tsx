@@ -27,30 +27,34 @@ export default function YonetimPage() {
       />
       <main className="bg-background">
         <Container className="py-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Liderlik"
-              title="Federasyon Başkanı"
-              align="center"
-            />
-          </Reveal>
-          <div className="mx-auto mt-10 max-w-sm">
-            <LeadershipCard member={federationPresident} featured />
-          </div>
+          <section id="baskan" className="scroll-mt-28">
+            <Reveal>
+              <SectionHeading
+                eyebrow="Liderlik"
+                title="Federasyon Başkanı"
+                align="center"
+              />
+            </Reveal>
+            <div className="mx-auto mt-10 max-w-sm">
+              <LeadershipCard member={federationPresident} featured />
+            </div>
+          </section>
 
-          <Reveal className="mt-16">
-            <SectionHeading
-              eyebrow="Yönetim"
-              title="Başkan Yardımcılarımız"
-              description="Federasyonumuzun başkan yardımcıları ve temsil ettikleri aşiret yapıları."
-              align="center"
-            />
-          </Reveal>
-          <StaggerGrid className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {vicePresidents.map((member) => (
-              <LeadershipCard key={member.id} member={member} />
-            ))}
-          </StaggerGrid>
+          <section id="baskan-yardimcilari" className="scroll-mt-28 mt-16">
+            <Reveal>
+              <SectionHeading
+                eyebrow="Yönetim"
+                title="Başkan Yardımcılarımız"
+                description="Federasyonumuzun başkan yardımcıları ve temsil ettikleri aşiret yapıları."
+                align="center"
+              />
+            </Reveal>
+            <StaggerGrid className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {vicePresidents.map((member) => (
+                <LeadershipCard key={member.id} member={member} />
+              ))}
+            </StaggerGrid>
+          </section>
 
           <Reveal className="mt-16">
             <SectionHeading
