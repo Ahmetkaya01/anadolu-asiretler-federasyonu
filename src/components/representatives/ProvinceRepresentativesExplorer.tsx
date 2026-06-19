@@ -9,8 +9,11 @@ import { buildRepresentativeMap } from "@/data/representatives";
 import { fadeUp, transition } from "@/lib/motion";
 import { Input } from "@/components/ui/Input";
 import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import { RepresentativeCard } from "@/components/representatives/RepresentativeCard";
 import { cn } from "@/lib/utils";
+
+const TOTAL_PROVINCES = 81;
 
 type ProvinceRepresentativesExplorerProps = {
   representatives: ProvincialRepresentative[];
@@ -25,6 +28,7 @@ export function ProvinceRepresentativesExplorer({
   );
 
   const activeCount = representatives.length;
+  const progressPercent = Math.round((activeCount / TOTAL_PROVINCES) * 100);
 
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string>(
@@ -46,13 +50,35 @@ export function ProvinceRepresentativesExplorer({
 
   return (
     <div className="mt-12">
-      <div className="mb-6 flex flex-col gap-4 rounded-md border border-navy/10 bg-white/80 p-4 shadow-sm backdrop-blur sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap items-center gap-3 text-sm text-slate">
+      <div className="mb-6 rounded-md border border-navy/10 bg-surface/80 p-5 shadow-sm backdrop-blur">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold text-foreground">
+              Teşkilatlanma İlerlemesi
+            </p>
+            <p className="mt-1 text-sm text-muted">
+              <strong className="text-burgundy">{activeCount}</strong> / {TOTAL_PROVINCES} il
+              temsilcisi atandı
+            </p>
+          </div>
+          <Badge variant="gold">%{progressPercent}</Badge>
+        </div>
+        <div className="mt-4 h-2 overflow-hidden rounded-full bg-surface-elevated">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-burgundy to-gold transition-all duration-700"
+            style={{ width: `${progressPercent}%` }}
+            role="progressbar"
+            aria-valuenow={activeCount}
+            aria-valuemin={0}
+            aria-valuemax={TOTAL_PROVINCES}
+            aria-label={`${activeCount} il temsilcisi atandı`}
+          />
+        </div>
+      </div>
+
+      <div className="mb-6 flex flex-col gap-4 rounded-md border border-navy/10 bg-surface/80 p-4 shadow-sm backdrop-blur sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-3 text-sm text-muted">
           <Badge variant="gold">{turkiyeIlleri.length} İl</Badge>
-          <span>
-            <strong className="text-navy">{activeCount}</strong> aktif temsilcilik
-          </span>
-          <span className="hidden sm:inline text-slate/40">|</span>
           <span className="text-xs sm:text-sm">
             Bir ile tıklayarak temsilci bilgisini görüntüleyin
           </span>
@@ -90,8 +116,8 @@ export function ProvinceRepresentativesExplorer({
                     isSelected
                       ? "border-gold bg-navy text-cream shadow-md"
                       : hasRep
-                        ? "border-gold/35 bg-white hover:border-gold hover:shadow-sm"
-                        : "border-navy/10 bg-white hover:border-navy/25 hover:bg-cream-dark/30",
+                        ? "border-gold/50 bg-surface shadow-sm hover:border-gold hover:shadow-md"
+                        : "border-navy/10 bg-surface hover:border-navy/25 hover:bg-surface-elevated/30",
                   )}
                 >
                   {hasRep && !isSelected && (
@@ -103,7 +129,7 @@ export function ProvinceRepresentativesExplorer({
                   <span
                     className={cn(
                       "text-[10px] font-semibold uppercase tracking-wider",
-                      isSelected ? "text-gold" : "text-slate",
+                      isSelected ? "text-gold" : "text-muted",
                     )}
                   >
                     {String(il.plate).padStart(2, "0")}
@@ -117,7 +143,7 @@ export function ProvinceRepresentativesExplorer({
           </div>
 
           {filteredIller.length === 0 && (
-            <p className="mt-6 text-center text-sm text-slate">
+            <p className="mt-6 text-center text-sm text-muted">
               Aramanıza uygun il bulunamadı.
             </p>
           )}
@@ -134,7 +160,7 @@ export function ProvinceRepresentativesExplorer({
               transition={transition.base}
             >
               {selectedIl && (
-                <div className="overflow-hidden rounded-md border border-navy/10 bg-white shadow-sm">
+                <div className="overflow-hidden rounded-md border border-navy/10 bg-surface shadow-card">
                   <div className="border-b border-gold/15 bg-navy px-5 py-4 text-cream">
                     <div className="flex items-center gap-2 text-gold">
                       <MapPin className="h-4 w-4" aria-hidden />
@@ -149,21 +175,25 @@ export function ProvinceRepresentativesExplorer({
                   {selectedRep ? (
                     <RepresentativeCard
                       representative={selectedRep}
-                      className="rounded-none border-0 shadow-none"
+                      className="rounded-none border-0 shadow-none ring-2 ring-inset ring-gold/20"
                     />
                   ) : (
                     <div className="flex flex-col items-center px-6 py-12 text-center">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-cream-dark text-slate/40">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-surface-elevated text-muted/40">
                         <UserRound className="h-8 w-8" aria-hidden />
                       </div>
-                      <h3 className="mt-5 font-display text-xl text-navy">
-                        Temsilci Ataması Sürecinde
+                      <h3 className="mt-5 font-display text-xl text-foreground">
+                        Atama Süreci Devam Ediyor
                       </h3>
-                      <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate">
-                        {selectedIl.name} ili için temsilcilik yapılanması devam
-                        etmektedir. Güncel atamalar tamamlandıkça bu alan
-                        güncellenecektir.
+                      <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
+                        {selectedIl.name} ili için temsilci atama sürecimiz devam
+                        etmektedir. Güncellemeler tamamlandıkça bu alan güncellenecektir.
                       </p>
+                      <div className="mt-6">
+                        <Button href="/iletisim" variant="secondary" size="sm">
+                          İletişime Geçin
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </div>

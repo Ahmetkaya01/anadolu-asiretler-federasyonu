@@ -15,12 +15,15 @@ import { cn } from "@/lib/utils";
 
 export function Header() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
+  const overlayHero = isHome && !scrolled;
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 48);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -38,16 +41,29 @@ export function Header() {
     setOpenDropdown(null);
   }, [pathname]);
 
+  const navLinkClass = overlayHero
+    ? "text-cream/90 hover:text-gold"
+    : "text-foreground/90 hover:text-gold";
+  const navActiveClass = overlayHero ? "text-gold" : "text-gold-light";
+
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b transition-smooth",
-        scrolled
-          ? "border-navy/10 bg-cream/95 shadow-sm backdrop-blur-md"
-          : "border-transparent bg-cream",
+        "z-50 border-b transition-smooth",
+        isHome ? "fixed left-0 right-0 top-0" : "sticky top-0",
+        overlayHero
+          ? "border-transparent bg-transparent"
+          : scrolled
+            ? "border-gold/10 bg-navy/95 shadow-lg backdrop-blur-lg"
+            : "border-gold/10 bg-background/95 backdrop-blur-md",
       )}
     >
-      <div className="hidden border-b border-gold/20 bg-navy text-cream lg:block">
+      <div
+        className={cn(
+          "hidden border-b lg:block",
+          overlayHero ? "border-gold/10 bg-navy/40 backdrop-blur-sm" : "border-gold/20 bg-navy",
+        )}
+      >
         <Container className="flex h-9 items-center justify-between text-xs">
           <p className="tracking-wide text-cream/80">{siteConfig.slogan}</p>
           <a
@@ -61,7 +77,7 @@ export function Header() {
       </div>
 
       <Container className="flex h-16 items-center justify-between gap-4 lg:h-20">
-        <Logo />
+        <Logo variant="compact" onDark={overlayHero} />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Ana menü">
           {mainNavigation.map((item) =>
@@ -74,7 +90,10 @@ export function Header() {
               >
                 <button
                   type="button"
-                  className="flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-medium text-navy transition-smooth hover:text-burgundy"
+                  className={cn(
+                    "flex items-center gap-1 rounded-sm px-3 py-2 text-base font-medium transition-smooth",
+                    navLinkClass,
+                  )}
                   aria-expanded={openDropdown === item.label}
                 >
                   {item.label}
@@ -94,12 +113,12 @@ export function Header() {
                       transition={{ duration: 0.22, ease: easeSmooth }}
                       className="absolute left-0 top-full min-w-[220px] pt-1"
                     >
-                      <ul className="overflow-hidden rounded-md border border-navy/10 bg-cream py-2 shadow-lg">
+                      <ul className="overflow-hidden rounded-md border border-gold/15 bg-surface py-2 shadow-lg">
                         {item.children.map((child) => (
                           <li key={child.href}>
                             <Link
                               href={child.href}
-                              className="block px-4 py-2.5 text-sm text-navy transition-smooth hover:bg-navy/5 hover:text-burgundy"
+                              className="block px-4 py-2.5 text-base text-foreground transition-smooth hover:bg-surface-elevated hover:text-gold"
                             >
                               {child.label}
                             </Link>
@@ -115,8 +134,8 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative rounded-sm px-3 py-2 text-sm font-medium transition-smooth hover:text-burgundy",
-                  pathname === item.href ? "text-burgundy" : "text-navy",
+                  "relative rounded-sm px-3 py-2 text-base font-medium transition-smooth",
+                  pathname === item.href ? navActiveClass : navLinkClass,
                 )}
               >
                 {item.label}
@@ -140,7 +159,10 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-sm p-2 text-navy transition-smooth hover:bg-navy/5 lg:hidden"
+          className={cn(
+            "inline-flex items-center justify-center rounded-sm p-2 transition-smooth lg:hidden",
+            overlayHero ? "text-cream hover:bg-cream/10" : "text-foreground hover:bg-surface-elevated",
+          )}
           onClick={() => setMobileOpen((v) => !v)}
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
@@ -158,7 +180,7 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 top-16 z-40 bg-navy/40 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 top-16 z-40 bg-navy/60 backdrop-blur-sm lg:hidden"
             onClick={() => setMobileOpen(false)}
             aria-hidden={!mobileOpen}
           >
@@ -167,7 +189,7 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 320, damping: 32 }}
-              className="absolute right-0 top-0 h-[calc(100vh-4rem)] w-full max-w-sm border-l border-gold/20 bg-cream p-6 shadow-2xl"
+              className="absolute right-0 top-0 h-[calc(100vh-4rem)] w-full max-w-sm border-l border-gold/20 bg-surface p-6 shadow-2xl"
               aria-label="Mobil menü"
               onClick={(e) => e.stopPropagation()}
             >
@@ -181,7 +203,7 @@ export function Header() {
                   >
                     <Link
                       href={item.href}
-                      className="block rounded-sm px-3 py-3 text-base font-medium text-navy transition-smooth hover:bg-navy/5"
+                      className="block rounded-sm px-3 py-3 text-base font-medium text-foreground transition-smooth hover:bg-surface-elevated"
                       onClick={() => setMobileOpen(false)}
                     >
                       {item.label}
@@ -192,7 +214,7 @@ export function Header() {
                           <li key={child.href}>
                             <Link
                               href={child.href}
-                              className="block py-2 text-sm text-slate transition-smooth hover:text-burgundy"
+                              className="block py-2 text-sm text-muted transition-smooth hover:text-gold"
                               onClick={() => setMobileOpen(false)}
                             >
                               {child.label}
@@ -204,7 +226,7 @@ export function Header() {
                   </motion.li>
                 ))}
               </ul>
-              <div className="mt-8 border-t border-navy/10 pt-6">
+              <div className="mt-8 border-t border-gold/15 pt-6">
                 <Button
                   href="/iletisim"
                   variant="primary"
@@ -215,7 +237,7 @@ export function Header() {
                 </Button>
                 <a
                   href={siteConfig.contact.phoneHref}
-                  className="mt-4 flex items-center justify-center gap-2 text-sm font-medium text-burgundy"
+                  className="mt-4 flex items-center justify-center gap-2 text-sm font-medium text-gold"
                 >
                   <Phone className="h-4 w-4" />
                   {siteConfig.contact.phone}

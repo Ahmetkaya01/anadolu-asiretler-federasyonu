@@ -23,7 +23,7 @@ export function RepresentativesSection({
   const items = limit ? representatives.slice(0, limit) : representatives;
 
   return (
-    <section className="py-20">
+    <section className="border-y border-gold/10 bg-surface/40 py-20">
       <Container>
         <Reveal>
           <SectionHeading

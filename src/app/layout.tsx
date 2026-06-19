@@ -1,18 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Source_Sans_3 } from "next/font/google";
+import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin", "latin-ext"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
 const sourceSans = Source_Sans_3({
   variable: "--font-source-sans",
   subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -41,6 +43,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [{ url: "/hero-banner.png", width: 1200, height: 630, alt: siteConfig.name }],
   },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/logo.jpg", sizes: "180x180", type: "image/jpeg" }],
+  },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
@@ -64,9 +70,9 @@ export default function RootLayout({
     <html
       lang="tr"
       data-scroll-behavior="smooth"
-      className={`${playfair.variable} ${sourceSans.variable} h-full`}
+      className={`${cormorant.variable} ${sourceSans.variable} h-full`}
     >
-      <body className="flex min-h-full flex-col font-sans antialiased">
+      <body className="flex min-h-full flex-col bg-background font-sans text-base text-foreground antialiased">
         <SiteLayout>{children}</SiteLayout>
       </body>
     </html>

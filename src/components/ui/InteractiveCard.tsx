@@ -24,7 +24,7 @@ export function InteractiveCard({
     >
       <Card
         className={cn(
-          "group h-full transition-shadow duration-500 hover:border-gold/30 hover:shadow-[0_20px_50px_-25px_rgba(11,31,58,0.45)]",
+          "group h-full transition-shadow duration-500 hover:border-gold/30 hover:shadow-card-hover",
           className,
         )}
       >

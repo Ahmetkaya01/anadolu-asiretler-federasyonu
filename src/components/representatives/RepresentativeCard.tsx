@@ -17,7 +17,7 @@ export function RepresentativeCard({
   return (
     <article
       className={cn(
-        "group overflow-hidden rounded-md border border-navy/10 bg-white shadow-sm transition-smooth hover:border-gold/35 hover:shadow-[0_20px_50px_-25px_rgba(11,31,58,0.45)]",
+        "group overflow-hidden rounded-md border border-gold/10 bg-surface shadow-sm transition-smooth hover:border-gold/35 hover:shadow-card-hover",
         className,
       )}
     >
@@ -33,7 +33,7 @@ export function RepresentativeCard({
       />
       <div className="border-t border-navy/5 p-5">
         <Badge variant="gold">{representative.city}</Badge>
-        <h3 className="mt-3 font-display text-xl text-navy">{representative.name}</h3>
+        <h3 className="mt-3 font-display text-xl text-foreground">{representative.name}</h3>
         <p className="mt-1.5 text-sm leading-relaxed text-burgundy">
           {representative.title}
         </p>

@@ -21,7 +21,7 @@ export function OptimizedImage({
   return (
     <div
       className={cn(
-        "relative overflow-hidden bg-gradient-to-b from-cream-dark/50 to-navy/5",
+        "relative overflow-hidden bg-gradient-to-b from-surface-elevated/80 to-background",
         frameClassName,
       )}
     >

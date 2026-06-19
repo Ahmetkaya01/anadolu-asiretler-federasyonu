@@ -1,16 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Megaphone } from "lucide-react";
-
-const headlines = [
-  { label: "Federasyonumuzdan Güncel Açıklama", href: "/haberler" },
-  { label: "81 İl Temsilciliği Koordinasyon Toplantısı", href: "/haberler" },
-  { label: "Gençlik ve Eğitim Odaklı Yeni Projeler", href: "/haberler" },
-  { label: "Üyelik ve bağlı dernekler ağına katılın", href: "/uyelik" },
-];
+import { getTickerItems } from "@/data/news";
 
 export function NewsTicker() {
+  const pathname = usePathname();
+  if (pathname === "/") return null;
+  const headlines = getTickerItems();
   const items = [...headlines, ...headlines];
 
   return (

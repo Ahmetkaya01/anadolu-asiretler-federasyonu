@@ -23,10 +23,10 @@ export default function IlTemsilcileriPage() {
           { label: "İl Temsilcileri" },
         ]}
       />
-      <main>
+      <main className="bg-background">
         <Container className="py-16">
           <Reveal>
-            <p className="mx-auto max-w-3xl text-center text-base leading-relaxed text-slate">
+            <p className="mx-auto max-w-3xl text-center text-lg leading-relaxed text-muted">
               Türkiye genelinde teşkilatlanma çalışmalarımız kapsamında 81 il
               temsilcilik hedefimiz doğrultusunda yapılanmamızı sürdürüyoruz.
               Haritadan veya listeden bir il seçerek temsilci bilgisine

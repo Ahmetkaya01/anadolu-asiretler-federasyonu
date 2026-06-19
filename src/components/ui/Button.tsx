@@ -10,14 +10,14 @@ const variantStyles: Record<ButtonVariant, string> = {
   secondary:
     "bg-navy text-cream shadow-md hover:bg-navy-light focus-visible:ring-gold",
   outline:
-    "border-2 border-gold/60 bg-transparent text-navy hover:border-gold hover:bg-gold/10",
-  ghost: "text-navy hover:bg-navy/5",
+    "border-2 border-gold/60 bg-transparent text-foreground hover:border-gold hover:bg-gold/10",
+  ghost: "text-foreground hover:bg-surface-elevated",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-4 py-2 text-sm",
-  md: "px-6 py-2.5 text-sm",
-  lg: "px-8 py-3 text-base",
+  sm: "px-4 py-2.5 text-sm",
+  md: "px-6 py-3 text-base",
+  lg: "px-8 py-3.5 text-lg",
 };
 
 type ButtonBaseProps = {
@@ -62,9 +62,9 @@ export function Button({
     );
   }
 
-  const buttonProps = props as ButtonAsButton;
+  const { type = "button", ...buttonProps } = props as ButtonAsButton;
   return (
-    <button className={classes} type="button" {...buttonProps}>
+    <button className={classes} type={type} {...buttonProps}>
       {children}
     </button>
   );

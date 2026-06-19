@@ -25,7 +25,7 @@ export default function YonetimPage() {
           { label: "Yönetim Kurulu" },
         ]}
       />
-      <main>
+      <main className="bg-background">
         <Container className="py-16">
           <Reveal>
             <SectionHeading
@@ -34,8 +34,8 @@ export default function YonetimPage() {
               align="center"
             />
           </Reveal>
-          <div className="mx-auto mt-10 max-w-xs">
-            <LeadershipCard member={federationPresident} />
+          <div className="mx-auto mt-10 max-w-sm">
+            <LeadershipCard member={federationPresident} featured />
           </div>
 
           <Reveal className="mt-16">

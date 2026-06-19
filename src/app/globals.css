@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Kurumsal renk paleti — logo ve prestijli kurumsal kimlik */
+/* Kurumsal renk paleti — koyu tema */
 :root {
   --color-navy: #0b1f3a;
   --color-navy-light: #142d52;
@@ -11,13 +11,23 @@
   --color-cream: #f7f5f2;
   --color-cream-dark: #ebe8e3;
   --color-slate: #5c6578;
-  --background: var(--color-cream);
-  --foreground: var(--color-navy);
+  --background: #0a1628;
+  --foreground: #f7f5f2;
+  --surface: #111f35;
+  --surface-elevated: #1a2d4a;
+  --muted: #94a3b8;
+  --border-subtle: color-mix(in srgb, var(--color-gold) 15%, transparent);
+  --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 12px 32px -8px rgba(0, 0, 0, 0.45);
+  --radius-lg: 0.5rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-muted: var(--muted);
   --color-navy: var(--color-navy);
   --color-navy-light: var(--color-navy-light);
   --color-burgundy: var(--color-burgundy);
@@ -28,11 +38,22 @@
   --color-cream-dark: var(--color-cream-dark);
   --color-slate: var(--color-slate);
   --font-sans: var(--font-source-sans);
-  --font-display: var(--font-playfair);
+  --font-display: var(--font-cormorant);
+  --text-base: 1.0625rem;
+  --text-lg: 1.1875rem;
+  --leading-body: 1.75;
+  --leading-heading: 1.15;
 }
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 17px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -47,45 +68,65 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  .hero-ken-burns {
+    animation: none !important;
+    transform: none !important;
+  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
-}
-
-/* Daha premium tipografi rendering */
-body {
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Link ve seçim davranışı */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  line-height: var(--leading-heading);
+  letter-spacing: -0.015em;
+}
+
+.font-display {
+  letter-spacing: -0.02em;
+}
+
 a {
   color: inherit;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
-/* Seçim rengi — marka uyumu */
 ::selection {
   background-color: color-mix(in srgb, var(--color-gold) 35%, transparent);
-  color: var(--color-navy);
+  color: var(--color-cream);
 }
 
-/* Odak halkaları erişilebilirlik */
 :focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 2px;
 }
 
-/* Yumuşak geçişler — buton, kart, link */
 .transition-smooth {
   transition-property: color, background-color, border-color, box-shadow, transform, opacity;
   transition-duration: 350ms;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-card-hover {
+  box-shadow: var(--shadow-card-hover);
 }
 
 @keyframes marquee {
@@ -107,13 +148,48 @@ a {
   }
 }
 
-/* Hafif noise hissi (arka planlarda kullanmak için yardımcı sınıf) */
+@keyframes ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+.hero-ken-burns {
+  animation: ken-burns 24s ease-out forwards;
+}
+
 .bg-grain {
   background-image: radial-gradient(
       circle at 1px 1px,
-      rgba(11, 31, 58, 0.06) 1px,
+      rgba(201, 162, 39, 0.04) 1px,
       transparent 0
     ),
-    radial-gradient(circle at 2px 2px, rgba(201, 162, 39, 0.04) 1px, transparent 0);
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.02) 1px, transparent 0);
   background-size: 18px 18px;
+}
+
+.pattern-anatolian {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A227' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-gold) 60%, transparent),
+    transparent
+  );
+}
+
+.hero-vignette {
+  box-shadow: inset 0 0 160px rgba(10, 22, 40, 0.65);
+}
+
+.border-gold-frame {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-gold) 35%, transparent);
 }

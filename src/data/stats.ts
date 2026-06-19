@@ -6,7 +6,7 @@ export const federationStats: StatItem[] = [
     value: 81,
     label: "İl Temsilciliği",
     description:
-      "Türkiye genelinde teşkilatlanma çalışmalarımız kapsamında aktif il temsilciliklerimizle hizmet veriyoruz.",
+      "Türkiye genelinde teşkilatlanma hedefimiz doğrultusunda il temsilcilik yapılanmamız sürdürülmektedir.",
   },
   {
     value: 250,

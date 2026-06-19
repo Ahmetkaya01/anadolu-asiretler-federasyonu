@@ -1,23 +1,16 @@
 import type { Metadata } from "next";
+import { Building2 } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Container } from "@/components/ui/Container";
-import { InteractiveCard } from "@/components/ui/InteractiveCard";
-import { StaggerGrid } from "@/components/ui/StaggerGrid";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { Button } from "@/components/ui/Button";
+import { affiliatesComingSoon } from "@/data/affiliates";
 
 export const metadata: Metadata = {
   title: "Üyelik ve Bağlı Dernekler",
   description:
     "Anadolu Aşiretler Federasyonu'na bağlı dernekler ve üyelik bilgileri.",
 };
-
-const associations = [
-  "İstanbul Anadolu Aşiretler Dayanışma Derneği",
-  "Ankara Kültür ve Dayanışma Derneği",
-  "Diyarbakır Aşiretler Eğitim Derneği",
-  "Van Toplumsal Birlik Derneği",
-  "Şanlıurfa Kültür ve Dayanışma Derneği",
-  "Mardin Gençlik ve Sosyal Destek Derneği",
-];
 
 export default function UyelikPage() {
   return (
@@ -30,21 +23,20 @@ export default function UyelikPage() {
           { label: "Üyelik" },
         ]}
       />
-      <main>
+      <main className="bg-background">
         <Container className="py-16">
-          <StaggerGrid className="grid gap-4 md:grid-cols-2">
-            {associations.map((name) => (
-              <InteractiveCard key={name}>
-                <article>
-                  <h2 className="font-display text-2xl text-navy">{name}</h2>
-                  <p className="mt-2 text-sm text-slate">
-                    Federasyon çatısı altında aktif temsil ve toplumsal dayanışma
-                    çalışmaları yürütmektedir.
-                  </p>
-                </article>
-              </InteractiveCard>
-            ))}
-          </StaggerGrid>
+          {affiliatesComingSoon ? (
+            <EmptyState
+              icon={Building2}
+              title="Bağlı Dernekler Listesi Hazırlanıyor"
+              description="Federasyonumuza bağlı dernek ve temsilciliklerin güncel listesi kısa süre içinde bu sayfada yayımlanacaktır. Üyelik süreçleri hakkında bilgi almak için bizimle iletişime geçebilirsiniz."
+              action={
+                <Button href="/iletisim" variant="primary">
+                  İletişime Geçin
+                </Button>
+              }
+            />
+          ) : null}
         </Container>
       </main>
     </>

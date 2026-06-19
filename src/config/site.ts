@@ -18,11 +18,25 @@ export const siteConfig = {
     mapEmbedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.0!2d28.9784!3d41.0082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDAwJzI5LjUiTiAyOMKwNTgnNDIuMiJF!5e0!3m2!1str!2str!4v1",
     mapLink: "https://maps.google.com",
+    mapPending: true,
   },
   social: {
-    facebook: "https://facebook.com",
-    instagram: "https://instagram.com",
-    twitter: "https://x.com",
-    youtube: "https://youtube.com",
+    facebook: null,
+    instagram: null,
+    twitter: null,
+    youtube: null,
+  } as {
+    facebook: string | null;
+    instagram: string | null;
+    twitter: string | null;
+    youtube: string | null;
   },
 } as const;
+
+export type SocialPlatform = keyof typeof siteConfig.social;
+
+export function getActiveSocialLinks() {
+  return (Object.entries(siteConfig.social) as [SocialPlatform, string | null][])
+    .filter((entry): entry is [SocialPlatform, string] => Boolean(entry[1]))
+    .map(([platform, href]) => ({ platform, href }));
+}

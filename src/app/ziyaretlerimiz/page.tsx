@@ -22,10 +22,10 @@ export default function ZiyaretlerimizPage() {
           { label: "Ziyaretlerimiz" },
         ]}
       />
-      <main>
+      <main className="bg-background">
         <Container className="py-16">
           <Reveal>
-            <p className="mx-auto mb-12 max-w-3xl text-center text-base leading-relaxed text-slate">
+            <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-muted">
               Anadolu Aşiretler Federasyonu olarak siyasi, toplumsal ve kurumsal
               düzeyde yürüttüğümüz ziyaret ve temaslarımızı bu sayfada paylaşıyoruz.
             </p>

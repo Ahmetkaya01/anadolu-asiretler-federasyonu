@@ -5,8 +5,8 @@ type BadgeVariant = "gold" | "burgundy" | "navy" | "muted";
 const variantStyles: Record<BadgeVariant, string> = {
   gold: "bg-gold/15 text-gold ring-1 ring-gold/30",
   burgundy: "bg-burgundy/10 text-burgundy ring-1 ring-burgundy/25",
-  navy: "bg-navy/10 text-navy ring-1 ring-navy/20",
-  muted: "bg-navy/5 text-slate ring-1 ring-navy/10",
+  navy: "bg-navy-light/50 text-cream ring-1 ring-gold/20",
+  muted: "bg-surface-elevated text-muted ring-1 ring-gold/10",
 };
 
 export function Badge({

@@ -1,18 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import type { StatItem, ProvincialRepresentative } from "@/types";
+import { getFeaturedNews } from "@/data/news";
+import { heroSlides } from "@/data/hero-slides";
 import { fadeUp, stagger, transition } from "@/lib/motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Badge } from "@/components/ui/Badge";
 import { InteractiveCard } from "@/components/ui/InteractiveCard";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { Reveal } from "@/components/ui/Reveal";
 import { RepresentativesSection } from "@/components/representatives/RepresentativesSection";
+import { NewsCardLink } from "@/components/news/NewsCard";
+import { FeatureBand } from "@/components/layout/FeatureBand";
+import { HeroSlideshow } from "@/components/home/HeroSlideshow";
 
 const quickLinks = [
   { title: "İletişim", text: "Federasyon iletişim bilgileri", href: "/iletisim" },
@@ -23,23 +29,7 @@ const quickLinks = [
   { title: "İl Temsilcileri", text: "Bölgesel teşkilatlanma kadromuz", href: "/kurumsal/il-temsilcileri" },
 ];
 
-const headlines = [
-  {
-    title: "Federasyonumuzdan Güncel Açıklama",
-    excerpt:
-      "Toplumsal birlik, kültürel miras ve dayanışma eksenindeki çalışmalarımız hız kesmeden sürüyor.",
-  },
-  {
-    title: "İl Temsilcilikleri Koordinasyon Toplantısı",
-    excerpt:
-      "81 il yapılanmamızın koordinasyonunu güçlendirmek üzere yeni dönem yol haritamız belirlendi.",
-  },
-  {
-    title: "Gençlik ve Eğitim Odaklı Yeni Projeler",
-    excerpt:
-      "Eğitim, kültür ve sosyal dayanışma alanında yeni proje çağrıları için hazırlık süreci başlatıldı.",
-  },
-];
+const featuredNews = getFeaturedNews(3);
 
 export function HomePageClient({
   siteName,
@@ -54,110 +44,120 @@ export function HomePageClient({
   stats: StatItem[];
   representatives: ProvincialRepresentative[];
 }) {
+  const [slideCaption, setSlideCaption] = useState(heroSlides[0]?.caption);
+
   return (
-    <main>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-navy">
-        <div className="relative aspect-[3/2] w-full max-h-[min(72vh,680px)]">
-          <Image
-            src="/hero-banner.png"
-            alt="Anadolu Aşiretler Federasyonu — birlik, kültür ve dayanışma"
-            fill
-            className="object-cover object-[center_45%]"
-            sizes="100vw"
-            priority
-            quality={90}
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-navy/88 via-navy/40 to-transparent"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-navy/10"
-            aria-hidden
-          />
-          <Container className="relative flex min-h-[320px] flex-col justify-center py-12 sm:min-h-[360px] sm:py-16 lg:py-20">
-            <motion.div
-              className="max-w-2xl"
-              initial="hidden"
-              animate="visible"
-              variants={stagger.container}
+    <main className="bg-background">
+      {/* Landing hero */}
+      <section className="relative min-h-[85vh] sm:min-h-[92vh]">
+        <HeroSlideshow
+          slides={heroSlides}
+          onSlideChange={(index) => setSlideCaption(heroSlides[index]?.caption)}
+        />
+
+        <Container className="relative z-10 flex min-h-[85vh] flex-col justify-center py-28 sm:min-h-[92vh] sm:py-32">
+          <motion.div
+            className="max-w-2xl"
+            initial="hidden"
+            animate="visible"
+            variants={stagger.container}
+          >
+            <motion.p
+              variants={fadeUp}
+              transition={transition.base}
+              className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-gold"
             >
-              <motion.p
-                variants={fadeUp}
-                transition={transition.base}
-                className="mb-4 text-xs font-semibold uppercase tracking-[0.25em] text-gold"
-              >
-                {siteName}
-              </motion.p>
-              <motion.h1
-                variants={fadeUp}
-                transition={transition.base}
-                className="max-w-xl font-display text-3xl font-semibold leading-tight text-cream sm:text-4xl lg:text-5xl"
-              >
-                {slogan}
-              </motion.h1>
-              <motion.p
-                variants={fadeUp}
-                transition={transition.base}
-                className="mt-5 max-w-lg text-base leading-relaxed text-cream/85 sm:text-lg"
-              >
-                {mission}
-              </motion.p>
-              <motion.div
-                variants={fadeUp}
-                transition={transition.base}
-                className="mt-8 flex flex-wrap gap-4"
-              >
-                <Button href="/kurumsal/hakkimizda" variant="primary" size="lg">
-                  Hakkımızda
-                </Button>
-                <Button href="/haberler" variant="outline" size="lg">
-                  Haberler
-                </Button>
-              </motion.div>
+              {siteName}
+            </motion.p>
+            <motion.h1
+              variants={fadeUp}
+              transition={transition.base}
+              className="max-w-xl font-display text-4xl font-semibold leading-tight text-cream sm:text-5xl lg:text-7xl"
+            >
+              {slogan}
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
+              transition={transition.base}
+              className="mt-5 max-w-lg text-lg leading-relaxed text-cream/85 sm:text-xl"
+            >
+              {mission}
+            </motion.p>
+            <motion.div
+              variants={fadeUp}
+              transition={transition.base}
+              className="mt-8 flex flex-wrap gap-4"
+            >
+              <Button href="/kurumsal/hakkimizda" variant="primary" size="lg">
+                Kurumsal
+              </Button>
+              <Button href="/iletisim" variant="outline" size="lg" className="text-cream border-gold/50 hover:text-cream">
+                İletişim
+              </Button>
             </motion.div>
-          </Container>
+          </motion.div>
+
+          {slideCaption && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              key={slideCaption}
+              className="mt-auto hidden pt-12 text-right text-sm font-medium tracking-wide text-cream/60 sm:block"
+            >
+              {slideCaption}
+            </motion.p>
+          )}
+        </Container>
+
+        <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-cream/50">
+          <span className="text-[10px] uppercase tracking-[0.2em]">Keşfet</span>
+          <ChevronDown className="h-4 w-4 animate-bounce" aria-hidden />
         </div>
+        <div className="divider-gold absolute bottom-0 left-0 right-0 z-10" />
       </section>
 
       {/* Başkanın mesajı */}
-      <section className="border-b border-gold/10 bg-cream py-16">
+      <section className="border-b border-gold/10 bg-surface py-16">
         <Container>
           <Reveal>
-            <blockquote className="relative mx-auto max-w-3xl text-center">
-              <span
-                className="pointer-events-none absolute -left-2 -top-6 font-display text-7xl leading-none text-gold/25 sm:-left-6"
-                aria-hidden
-              >
-                “
-              </span>
-              <p className="relative font-display text-2xl leading-relaxed text-navy sm:text-3xl">
-                Birlik, beraberlik ve kültürel mirasımızı yaşatma amacıyla tüm
-                temsilciliklerimizle omuz omuza çalışıyoruz.
-              </p>
-              <p className="mt-5 text-base leading-relaxed text-slate">
-                Federasyonumuz; eğitim, kültür ve sosyal dayanışma alanında sürdürülebilir
-                projelerle Anadolu&apos;nun köklü değerlerini geleceğe taşımayı hedefliyor.
-              </p>
-              <footer className="mt-8">
-                <p className="font-display text-xl text-navy">Ferhat ARMAĞAN</p>
-                <p className="mt-1 text-sm font-semibold uppercase tracking-widest text-burgundy">
-                  Federasyon Başkanı
+            <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[240px_1fr] lg:items-start">
+              <div className="relative mx-auto aspect-[3/4] w-full max-w-[240px] overflow-hidden rounded-md border-2 border-gold/30 shadow-card">
+                <Image
+                  src="/president-ferhat-armagan.png"
+                  alt="Ferhat ARMAĞAN — Federasyon Başkanı"
+                  fill
+                  className="object-contain object-top bg-surface-elevated"
+                  sizes="240px"
+                />
+              </div>
+              <blockquote className="relative border-l-4 border-gold pl-6 sm:pl-8">
+                <p className="font-display text-2xl italic leading-relaxed text-foreground sm:text-3xl">
+                  Birlik, beraberlik ve kültürel mirasımızı yaşatma amacıyla tüm
+                  temsilciliklerimizle omuz omuza çalışıyoruz.
                 </p>
-                <div className="mt-6">
-                  <Button href="/kurumsal/hakkimizda" variant="ghost" size="sm">
-                    Kurumsal profil →
-                  </Button>
-                </div>
-              </footer>
-            </blockquote>
+                <p className="mt-5 text-lg leading-relaxed text-muted">
+                  Federasyonumuz; eğitim, kültür ve sosyal dayanışma alanında sürdürülebilir
+                  projelerle Anadolu&apos;nun köklü değerlerini geleceğe taşımayı hedefliyor.
+                </p>
+                <footer className="mt-8">
+                  <p className="font-display text-2xl text-foreground">Ferhat ARMAĞAN</p>
+                  <p className="mt-1 text-sm font-semibold uppercase tracking-widest text-gold">
+                    Federasyon Başkanı
+                  </p>
+                  <div className="mt-6">
+                    <Button href="/kurumsal/hakkimizda" variant="ghost" size="sm">
+                      Hakkımızda →
+                    </Button>
+                  </div>
+                </footer>
+              </blockquote>
+            </div>
           </Reveal>
         </Container>
       </section>
 
       {/* Hızlı erişim */}
-      <section className="-mt-10 pb-20">
+      <section className="bg-background py-20">
         <Container>
           <motion.div
             className="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
@@ -173,9 +173,9 @@ export function HomePageClient({
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">
                       Hızlı Erişim
                     </p>
-                    <h3 className="mt-2 font-display text-2xl text-navy">{item.title}</h3>
-                    <p className="mt-2 text-sm text-slate">{item.text}</p>
-                    <p className="mt-4 text-sm font-semibold text-burgundy transition-smooth group-hover:translate-x-1">
+                    <h3 className="mt-2 font-display text-2xl text-foreground sm:text-3xl">{item.title}</h3>
+                    <p className="mt-2 text-base text-muted">{item.text}</p>
+                    <p className="mt-4 text-sm font-semibold text-gold-light transition-smooth group-hover:translate-x-1">
                       İncele →
                     </p>
                   </Link>
@@ -187,7 +187,7 @@ export function HomePageClient({
       </section>
 
       {/* Gündem */}
-      <section className="bg-cream-dark/40 py-20 bg-grain">
+      <section className="border-y border-gold/10 bg-surface/50 py-20 bg-grain">
         <Container>
           <Reveal>
             <SectionHeading
@@ -203,79 +203,67 @@ export function HomePageClient({
             viewport={{ once: true, margin: "-50px" }}
             variants={stagger.container}
           >
-            {headlines.map((item) => (
-              <motion.div key={item.title} variants={fadeUp} transition={transition.base}>
-                <InteractiveCard>
-                  <Badge variant="burgundy">Haber</Badge>
-                  <h3 className="mt-4 font-display text-2xl leading-tight text-navy">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate">{item.excerpt}</p>
-                  <div className="mt-6">
-                    <Button href="/haberler" variant="ghost" size="sm">
-                      Tüm içerikler →
-                    </Button>
-                  </div>
-                </InteractiveCard>
+            {featuredNews.map((post) => (
+              <motion.div key={post.slug} variants={fadeUp} transition={transition.base}>
+                <NewsCardLink post={post} />
               </motion.div>
             ))}
           </motion.div>
+          <Reveal className="mt-8 text-center">
+            <Button href="/haberler" variant="ghost">
+              Tüm haberler →
+            </Button>
+          </Reveal>
         </Container>
       </section>
 
-      <RepresentativesSection
-        representatives={representatives}
-        showAllLink
-      />
+      <RepresentativesSection representatives={representatives} showAllLink />
 
-      {/* İstatistikler + CTA */}
-      <section className="py-20">
+      <FeatureBand
+        eyebrow="Temel Göstergeler"
+        title="Köklü Geçmişten Güçlü Geleceğe"
+        description="Federasyonumuzun kurumsal göstergeleri. İl temsilcilikleri yapılanması sürecimiz devam etmektedir."
+      >
+        <div className="grid gap-6 md:grid-cols-3">
+          {stats.map((item) => (
+            <div
+              key={item.label}
+              className="rounded-md border border-gold/20 bg-navy-light/50 p-6 text-center backdrop-blur-sm"
+            >
+              <p className="font-display text-5xl text-gold">
+                <AnimatedCounter value={item.value} suffix={item.suffix ?? ""} />
+              </p>
+              <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-cream">
+                {item.label}
+              </p>
+              {item.description && (
+                <p className="mt-3 text-xs leading-relaxed text-cream/65">{item.description}</p>
+              )}
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 text-center text-xs text-cream/50">
+          * İl temsilcilikleri teşkilatlanması devam etmektedir.
+        </p>
+      </FeatureBand>
+
+      <section className="bg-background py-20">
         <Container>
           <Reveal>
-            <SectionHeading
-              eyebrow="Temel Göstergeler"
-              title="Köklü Geçmişten Güçlü Geleceğe"
-              description="Mevcut federasyon verileri doğrultusunda güncellenen kurumsal göstergeler."
-              align="center"
-            />
-          </Reveal>
-          <motion.div
-            className="mt-10 grid gap-5 md:grid-cols-3"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={stagger.container}
-          >
-            {stats.map((item) => (
-              <motion.div key={item.label} variants={fadeUp} transition={transition.base}>
-                <InteractiveCard bodyClassName="text-center">
-                  <p className="font-display text-5xl text-navy">
-                    <AnimatedCounter value={item.value} suffix={item.suffix ?? ""} />
-                  </p>
-                  <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-burgundy">
-                    {item.label}
-                  </p>
-                  <p className="mt-3 text-sm text-slate">{item.description}</p>
-                </InteractiveCard>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <Reveal delay={0.1} className="mt-12">
             <motion.div
               whileHover={{ scale: 1.005 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="overflow-hidden rounded-lg border border-gold/25 bg-navy p-8 text-cream lg:p-10"
+              className="overflow-hidden rounded-lg border border-gold/25 bg-surface p-8 pattern-anatolian lg:p-10"
             >
-              <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+              <div className="relative grid gap-8 lg:grid-cols-12 lg:items-center">
                 <div className="lg:col-span-8">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">
                     Birlikte daha güçlü
                   </p>
-                  <h3 className="mt-3 font-display text-3xl leading-tight sm:text-4xl">
+                  <h3 className="mt-3 font-display text-3xl leading-tight text-foreground sm:text-4xl lg:text-5xl">
                     Üyelik ve bağlı dernekler ağına katılın
                   </h3>
-                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-cream/75">
+                  <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
                     Temsilciliklerimiz ve gönüllü üyelerimizle kültürel mirası yaşatmak
                     için ortak çalışmalar yürütüyoruz.
                   </p>
@@ -285,7 +273,7 @@ export function HomePageClient({
                     <Button href="/uyelik" variant="primary">
                       Üyelik Bilgisi
                     </Button>
-                    <Button href="/iletisim" variant="outline">
+                    <Button href="/iletisim" variant="outline" className="text-cream border-gold/50">
                       İletişim
                     </Button>
                   </div>
